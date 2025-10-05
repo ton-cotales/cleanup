@@ -1,9 +1,9 @@
 <#
-    Script Name: CleanUp.ps1
+    Script Name: cleanup.ps1
     Author: Ton Cotales
     Email: anthony.cotales.civ@gmail.com
     Date: 2025-10-04
-    Version: 1.0
+    Version: 1.0.0
     Description: This script cleans temp files, clears recycle bin, DNS cache, and improves basic system performance.
 #>
 
@@ -20,8 +20,7 @@ Remove-Item -Path "$env:APPDATA\Microsoft\Windows\Recent\CustomDestinations\*" -
 Remove-Item -Path "$env:APPDATA\Microsoft\Windows\Recent\*" -Recurse -Force -ErrorAction SilentlyContinue;
 
 # Restart the windows explorer (fix UI lag)
-#Stop-Process -Name explorer -Force; Start-Process explorer.exe
-Stop-Process -Name explorer -Force -ErrorAction SilentlyContinue;
+Stop-Process -Name explorer -Force; Start-Process explorer.exe -ErrorAction SilentlyContinue;
 
 # Empty the recycle bin
 Clear-RecycleBin -Force -ErrorAction SilentlyContinue;
