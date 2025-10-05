@@ -20,7 +20,9 @@ This tool cleans temporary files, clears the Recycle Bin, flushes the DNS cache,
 
 1. **Download** the latest `.exe` file from the [Releases](https://github.com/ton-cotales/cleanup/releases/tag/v1.0.0) section.  
 2. **Run as Administrator** to allow system-level cleaning.  
-3. Wait for the tool to complete the cleanup — it only takes a few seconds.  
+3. Wait for the tool to complete the cleanup — it only takes a few seconds.
+
+- [⬇️ Download EXE](https://github.com/ton-cotales/cleanup/releases/download/v1.0.0/Cleanup.exe)
 
 ---
 
