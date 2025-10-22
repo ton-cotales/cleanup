@@ -1,12 +1,16 @@
 <#
     Script Name: cleanup.ps1
-    Author: Ton Cotales
-    Email: anthony.cotales.civ@gmail.com
+    Author: Anthony Cotales
+    Email: ton.cotales@gmail.com
     Date: 2025-10-04
-    Version: 1.0.0
     Description: This script cleans temp files, clears recycle bin, DNS cache, and improves basic system performance.
 #>
 
+# Restart the windows explorer (fix UI lag)
+#Stop-Process -Name explorer -Force; Start-Process explorer.exe
+
+# Clear DNS Cache (if network is slow)
+#Clear-DnsClientCache -ErrorAction SilentlyContinue;
 
 # Clear the system clipboard history
 Restart-Service cbdhsvc_* -Force -ErrorAction SilentlyContinue;
@@ -19,9 +23,6 @@ Remove-Item -Path "$env:APPDATA\Microsoft\Windows\Recent\AutomaticDestinations\*
 Remove-Item -Path "$env:APPDATA\Microsoft\Windows\Recent\CustomDestinations\*" -Recurse -Force -ErrorAction SilentlyContinue;
 Remove-Item -Path "$env:APPDATA\Microsoft\Windows\Recent\*" -Recurse -Force -ErrorAction SilentlyContinue;
 
-# Restart the windows explorer (fix UI lag)
-Stop-Process -Name explorer -Force; Start-Process explorer.exe -ErrorAction SilentlyContinue;
-
 # Empty the recycle bin
 Clear-RecycleBin -Force -ErrorAction SilentlyContinue;
 
@@ -31,16 +32,11 @@ Remove-Item -Path "$env:TEMP\*" -Recurse -Force -ErrorAction SilentlyContinue;
 # Delete system's temporary files
 Remove-Item -Path "$env:SystemRoot\Temp\*" -Recurse -Force -ErrorAction SilentlyContinue;
 
-# Clear DNS Cache (if network is slow)
-Clear-DnsClientCache -ErrorAction SilentlyContinue;
 
+# Showing messagebox of the complete procedure
+[System.Windows.Forms.MessageBox]::Show(
+    "System Cleanup COMPLETE!",
+    "cleanup.exe",
+    [System.Windows.Forms.MessageBoxButtons]::OK,
+    [System.Windows.Forms.MessageBoxIcon]::Information)
 
-# System cleanup finished. Show message box
-Add-Type -AssemblyName System.Windows.Forms
-
-$message = "System Cleanup COMPLETE!"
-$title   = "System Cleanup"
-$button  = [System.Windows.Forms.MessageBoxButtons]::OK
-$icon    = [System.Windows.Forms.MessageBoxIcon]::Information
-
-[System.Windows.Forms.MessageBox]::Show($message, $title, $button, $icon)
